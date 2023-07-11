@@ -47,12 +47,28 @@ public class SearchClassAndSkill extends HttpServlet {
         if (search != null) {
             cl = c.SeacrchClassByNameAndTeacher(search);
             sl = s.SeacrchSkillByNameAndTeacher(search);
-            request.setAttribute("year", LocalDate.now().getYear());
-            request.setAttribute("listcl", cl);
-            request.setAttribute("listc2", child);
-            request.setAttribute("listc3", sl);
-            request.setAttribute("listc4", child1);
-            request.getRequestDispatcher("class.jsp").forward(request, response);
+            if (!cl.isEmpty() && sl.isEmpty()) {
+                request.setAttribute("msq1", "Not Found");
+                request.setAttribute("year", LocalDate.now().getYear());
+                request.setAttribute("listcl", cl);
+                request.setAttribute("listc2", child);
+                request.setAttribute("listc3", sl);
+                request.setAttribute("listc4", child1);
+                request.getRequestDispatcher("class.jsp").forward(request, response);
+
+            } else if (!sl.isEmpty()&&cl.isEmpty() ) {
+                request.setAttribute("msq", "Not Found");
+                request.setAttribute("year", LocalDate.now().getYear());
+                request.setAttribute("listcl", cl);
+                request.setAttribute("listc2", child);
+                request.setAttribute("listc3", sl);
+                request.setAttribute("listc4", child1);
+                request.getRequestDispatcher("class.jsp").forward(request, response);
+            } else {
+                request.setAttribute("msq", "Not Found");
+                request.getRequestDispatcher("class.jsp").forward(request, response);
+            }
+
         } else {
             response.sendRedirect("ListClass?id=" + id);
         }

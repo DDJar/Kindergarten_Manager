@@ -1,5 +1,6 @@
-
 package com.vnpay.common;
+
+import javax.servlet.http.HttpServletRequest;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
@@ -13,7 +14,6 @@ import java.util.Map;
 import java.util.Random;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
 public class Config {
 
     public static String vnp_PayUrl = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-    public static String vnp_Returnurl = "http://localhost:8080/vnpay_jsp/vnpay_return.jsp";
+    public static String vnp_Returnurl = "http://localhost:8080/A01_RT03/vnpay_return.jsp";
     public static String vnp_TmnCode = "RUDQTWF3";
     public static String vnp_HashSecret = "AOGLGLVJBYVITNQNJMPLKDDRJCHRDODQ";
     public static String vnp_apiUrl = "https://sandbox.vnpayment.vn/merchant_webapi/api/transaction";

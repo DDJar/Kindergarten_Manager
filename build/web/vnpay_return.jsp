@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="model.tuition.TuitionV2DB"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.nio.charset.StandardCharsets"%>
 <%@page import="com.vnpay.common.Config"%>
@@ -71,7 +73,7 @@
                 <div class="form-group">
                     <label >VNPAY Response Code:</label>
                     <label><%=request.getParameter("vnp_ResponseCode")%></label>
-                </div> 
+                </div>
                 <div class="form-group">
                     <label >VNPAY Transaction Code:</label>
                     <label><%=request.getParameter("vnp_TransactionNo")%></label>
@@ -85,21 +87,32 @@
                     <label><%=request.getParameter("vnp_PayDate")%></label>
                 </div> 
                 <div class="form-group">
-                    <label >Payment Status:</label>
-                    <label>
-                        <%
-                            if (signValue.equals(vnp_SecureHash)) {
-                                if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
-                                    out.print("Success");
-                                } else {
-                                    out.print("Failed");
-                                }
-
-                            } else {
-                                out.print("invalid signature");
-                            }
-                        %></label>
+                    <label >idChild</label>
+                    <% String idChild = session.getAttribute("idChild").toString();%>
+                    <label><%= session.getAttribute("idChild")%></label>
                 </div> 
+                <div class="form-group">
+                    <label >Payment Status:</label>
+
+                    <%
+                        if (signValue.equals(vnp_SecureHash)) {
+                            if ("00".equals(request.getParameter("vnp_TransactionStatus"))) {
+                                out.print("Success");
+                                if (TuitionV2DB.UpdateTuitionByIdChild(idChild, "Yes")) {
+                                    if (TuitionV2DB.UpdateListFeesV2ByIdChild(idChild, "Yes")) {
+                                    }
+                                }
+                            } else {
+                                out.print("Failed");
+                            }
+
+                        } else {
+                            out.print("invalid signature");
+                        }
+                    %>
+                </div>
+                <a href="index.jsp" > <button>Home</button></a>
+                <c:remove var="idChild" scope="session"/>
             </div>
             <p>
                 &nbsp;

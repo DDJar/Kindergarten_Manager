@@ -135,6 +135,9 @@
                                     <td>
                                         ${i.getHealth()}
                                     </td>
+                                    <td>
+                                       
+                                    </td>
                                     <td style="width: 20%;">
                                         <a href="decision-skill?id=${i.idChild}&status=Accept" class="btn btn-success" type="button"  >Yes</a>
                                         <a href="decision-skill?id=${i.idChild}&status=NoAccept" class="btn btn-danger" type="button" >No</a>

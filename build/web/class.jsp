@@ -69,6 +69,7 @@
                     <div class="text-center pb-2">
                         <p class="section-title px-5"><span class="px-2">Popular Classes</span></p>
                         <h1 class="mb-4">Classes for Your Kids</h1>
+                        <h3 class="text-danger" style="text-align: center">${msq}</h3>
                     </div>
                     <div class="row">
 
@@ -277,6 +278,7 @@
                     <div class="text-center pb-2">
                         <p class="section-title px-5"><span class="px-2">Popular Course</span></p>
                         <h1 class="mb-4">Course for Your Kids <br>(Only Kids Have Class)</h1>
+                        <h3 class="text-danger" style="text-align: center">${msq1}</h3>
                     </div>
                     <div class="row">
                         <c:forEach var="i" items="${listc3}" >

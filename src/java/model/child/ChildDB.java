@@ -318,6 +318,7 @@ public class ChildDB {
                     + "      ,Child.[imgAvt]\n"
                     + "      ,Child.[imgDob]\n"
                     + "    ,Class.[status]\n"
+                    + "    ,Class.[className]\n"
                     + "  FROM [A01_RT03].[dbo].[Class]\n"
                     + "  INNER JOIN Child\n"
                     + "  ON Child.idChild  = [Class].idChild\n"
@@ -338,7 +339,8 @@ public class ChildDB {
                 String health = rs.getString(10);
                 String imgAvt = rs.getString(11);
                 String imgDob = rs.getString(12);
-                list.add(new Child(idChild, childName, idUser, dob, gender, progress, weight, height, health, imgAvt, imgDob));
+                String className = rs.getString(13);
+                list.add(new Child(idChild, childName, idUser, dob, gender, progress, weight, height, health, imgAvt, imgDob, className));
             }
             con.close();
             return list;
@@ -395,7 +397,8 @@ public class ChildDB {
     public ArrayList<Child> getAllChildByStatus2(String status) {
         ArrayList<Child> list = new ArrayList<>();
         try ( Connection con = DatabaseInfo.getConnect()) {
-            PreparedStatement stmt = con.prepareStatement("SELECT  [SkillList].[idSkill]\n"
+            PreparedStatement stmt = con.prepareStatement("SELECT  "
+                    + "[SkillList].[idSkill]\n"
                     + "       ,Child.idChild \n"
                     + "	   ,Child.[childName]   \n"
                     + "       ,Child.[idUser] \n"

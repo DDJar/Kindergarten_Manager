@@ -28,6 +28,7 @@ public class Child {
     private String imgAvt;
     private String imgDob;
     private String status;
+    
     public Child() {
     }
  public Child(String idChild, String childName, String idUser, Date dob, String gender, String progress, double weight, int height, String health, String imgAvt, String imgDob, String status) {
@@ -44,6 +45,12 @@ public class Child {
         this.imgDob = imgDob;
         this.status = status;
     }
+ 
+ //Cho get className
+
+ //cho get skillName
+
+  
     public Child(String idChild, String childName, String idUser, Date dob, String gender, String progress, double weight, int height, String health, String imgAvt, String imgDob) {
         this.idChild = idChild;
         this.childName = childName;
@@ -178,6 +185,8 @@ public class Child {
     public void setImgAvt(String imgAvt) {
         this.imgAvt = imgAvt;
     }
+
+    
 
   
 }

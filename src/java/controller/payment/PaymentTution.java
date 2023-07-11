@@ -29,9 +29,13 @@ public class PaymentTution extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       String tution = request.getParameter("tution");
-       request.setAttribute("tution", tution);
-        request.getRequestDispatcher("vnpay_pay.jsp").forward(request, response);
+       String amount = request.getParameter("amount");
+       String idChild = request.getParameter("idChild");
+       request.setAttribute("tution", amount);
+       
+       request.getSession().setAttribute("idChild", idChild);
+       
+       request.getRequestDispatcher("vnpayajax?amount="+amount).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

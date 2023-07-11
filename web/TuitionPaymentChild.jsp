@@ -101,7 +101,9 @@
                             </div>
                             <div class="d-flex justify-content-center" style="min-height: 70px">
                                 <div class="form-group p-3">
-                                    <a href="PaymentTution?tution=${tuition.tuition}">
+                                    <a href="PaymentTution?amount=${tuition.tuition}&idChild=${childRequest.idChild}">
+                                    <!--<a href="vnpayajax">-->
+                                    
                                         <span class=" btn bg-success text-white">
                                             Payment Transaction
                                         </span>

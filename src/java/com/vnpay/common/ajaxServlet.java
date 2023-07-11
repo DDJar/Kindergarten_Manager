@@ -7,6 +7,7 @@ package com.vnpay.common;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import static controller.payment.PaymentByIdChildV2.SUCCESS;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -23,6 +24,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.tuition.TuitionV2DB;
 
 /**
  *
@@ -31,30 +33,48 @@ import javax.servlet.http.HttpServletResponse;
 public class ajaxServlet extends HttpServlet {
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
         String vnp_Version = "2.1.0";
         String vnp_Command = "pay";
-        String orderType = req.getParameter("ordertype");
-        long amount = Integer.parseInt(req.getParameter("amount"))*2400000;
-        String bankCode = req.getParameter("bankCode");
+        String orderType = "ordertype";
         
+        long amount = Integer.parseInt(req.getParameter("amount")) * 100 * 23000;
+//        long amount = 50000*100;
+        String bankCode = req.getParameter("bankCode"); // Cách giao dịch
+        String idChild = req.getParameter("idChild"); // Cách giao dịch
+
         String vnp_TxnRef = Config.getRandomNumber(8);
         String vnp_IpAddr = Config.getIpAddress(req);
         String vnp_TmnCode = Config.vnp_TmnCode;
-        
+
         Map<String, String> vnp_Params = new HashMap<>();
         vnp_Params.put("vnp_Version", vnp_Version);
         vnp_Params.put("vnp_Command", vnp_Command);
         vnp_Params.put("vnp_TmnCode", vnp_TmnCode);
         vnp_Params.put("vnp_Amount", String.valueOf(amount));
         vnp_Params.put("vnp_CurrCode", "VND");
+//        vnp_Params.put("idChild", idChild);
         
+
         if (bankCode != null && !bankCode.isEmpty()) {
             vnp_Params.put("vnp_BankCode", bankCode);
+            
+            //them
+//            if(TuitionV2DB.UpdateTuitionByIdChild(idChild, "Yes")  ){
+//             if(TuitionV2DB.UpdateListFeesV2ByIdChild(idChild, "Yes")){
+//             }
+           
+//         }
+            //them
         }
         vnp_Params.put("vnp_TxnRef", vnp_TxnRef);
-        vnp_Params.put("vnp_OrderInfo", "Thanh toan don hang:" + vnp_TxnRef);
+        vnp_Params.put("vnp_OrderInfo", vnp_TxnRef);
         vnp_Params.put("vnp_OrderType", orderType);
 
         String locate = req.getParameter("language");
@@ -70,11 +90,11 @@ public class ajaxServlet extends HttpServlet {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMddHHmmss");
         String vnp_CreateDate = formatter.format(cld.getTime());
         vnp_Params.put("vnp_CreateDate", vnp_CreateDate);
-        
+
         cld.add(Calendar.MINUTE, 15);
         String vnp_ExpireDate = formatter.format(cld.getTime());
         vnp_Params.put("vnp_ExpireDate", vnp_ExpireDate);
-        
+
         List fieldNames = new ArrayList(vnp_Params.keySet());
         Collections.sort(fieldNames);
         StringBuilder hashData = new StringBuilder();
@@ -102,12 +122,7 @@ public class ajaxServlet extends HttpServlet {
         String vnp_SecureHash = Config.hmacSHA512(Config.vnp_HashSecret, hashData.toString());
         queryUrl += "&vnp_SecureHash=" + vnp_SecureHash;
         String paymentUrl = Config.vnp_PayUrl + "?" + queryUrl;
-        com.google.gson.JsonObject job = new JsonObject();
-        job.addProperty("code", "00");
-        job.addProperty("message", "success");
-        job.addProperty("data", paymentUrl);
-        Gson gson = new Gson();
-        resp.getWriter().write(gson.toJson(job));
+        resp.sendRedirect(paymentUrl);
     }
 
 }
