@@ -28,7 +28,7 @@ public class Child {
     private String imgAvt;
     private String imgDob;
     private String status;
-    
+      private String nameClass;
     public Child() {
     }
  public Child(String idChild, String childName, String idUser, Date dob, String gender, String progress, double weight, int height, String health, String imgAvt, String imgDob, String status) {
@@ -49,6 +49,22 @@ public class Child {
  //Cho get className
 
  //cho get skillName
+
+    public Child(String idChild, String childName, String idUser, Date dob, String gender, String progress, double weight, int height, String health, String imgAvt, String imgDob, String status, String nameClass) {
+        this.idChild = idChild;
+        this.childName = childName;
+        this.idUser = idUser;
+        this.dob = dob;
+        this.gender = gender;
+        this.progress = progress;
+        this.weight = weight;
+        this.height = height;
+        this.health = health;
+        this.imgAvt = imgAvt;
+        this.imgDob = imgDob;
+        this.status = status;
+        this.nameClass = nameClass;
+    }
 
   
     public Child(String idChild, String childName, String idUser, Date dob, String gender, String progress, double weight, int height, String health, String imgAvt, String imgDob) {
@@ -77,6 +93,14 @@ public class Child {
         this.health = health;
         this.imgAvt = imgAvt;
         this.imgDob = imgDob;
+    }
+
+    public String getNameClass() {
+        return nameClass;
+    }
+
+    public void setNameClass(String nameClass) {
+        this.nameClass = nameClass;
     }
 
     public String getStatus() {

@@ -7,16 +7,16 @@
 <body>
 
     <!-- Header Start -->
-    
+
     <div class="container-fluid bg-primary mb-5 row">
-            <div class="d-flex flex-column  justify-content-center container" style="min-height: 70px">
-                <div class="d-inline-flex text-white">
-                    <p class="m-0"><a class="text-white" href="">Home</a></p>
-                    <p class="m-0 px-2">/</p>
-                    <p class="m-0">Class Number</p>
-                </div>
+        <div class="d-flex flex-column  justify-content-center container" style="min-height: 70px">
+            <div class="d-inline-flex text-white">
+                <p class="m-0"><a class="text-white" href="">Home</a></p>
+                <p class="m-0 px-2">/</p>
+                <p class="m-0">Class Number</p>
             </div>
         </div>
+    </div>
     <!-- Header End -->
 
 
@@ -38,30 +38,31 @@
                         <table class="table user-list">
                             <thead>
                                 <tr>
-                                    <th>Index</th>
+                                    <th style="width: 2%;">Index</th>
                                     <th><span>Name</span></th>
                                     <th><span>DOB</span></th>
                                     <th class="text-center"><span>gender</span></th>
                                     <th><span>weight</span></th>
                                     <th><span>height</span></th>
                                     <th><span>health</span></th>
-                                    <th>&nbsp;</th>
+                                    <th><span>Class</span></th>
+                                    <th style="width: 20%;">Option</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <%int count = 0;%>
                                 <c:forEach var="o" items="${listA}" >
                                     <tr>
-                                            <td><%count++;
+                                        <td style="width: 2%;"><%count++;
                                                 out.print(count);%></td>
                                         <td>
                                             <img src="./img/${o.imgAvt}" alt="" width="50" height="50">
                                             <p>${o.childName}</p>
                                         </td>
-                                        <td>
+                                        <td style="width: 11%;">
                                             <p>${o.getDateOB()}</p>
                                         </td>
-                                        <td>
+                                        <td style="width: 2%;">
                                             <c:if test="${o.getGender() == 'M'}">
                                                 Male
                                             </c:if>
@@ -70,16 +71,19 @@
                                             </c:if>
                                         </td>
 
-                                        <td >
+                                        <td style="width: 2%;">
                                             ${o.getWeight()}
                                         </td>
-                                        <td>
+                                        <td style="width: 2%;">
                                             ${o.getHeight()}
                                         </td>
                                         <td>
                                             ${o.getHealth()}
                                         </td>
-                                        <td style="width: 20%;">
+                                        <td>
+                                            ${o.getNameClass()}
+                                        </td>
+                                        <td style="width: 10%;">
                                             <a href="decision?id=${o.idChild}&status=Accept" class="btn btn-success" type="button"  >Yes</a>
                                             <a href="decision?id=${o.idChild}&status=NoAccept" class="btn btn-danger" type="button" >No</a>
                                         </td>
@@ -95,21 +99,23 @@
                     <table class="table user-list">
                         <thead>
                             <tr>
-                                <th>Index</th>
+                                <th style="width: 2%;">Index</th>
                                 <th><span>Name</span></th>
                                 <th><span>DOB</span></th>
                                 <th class="text-center"><span>gender</span></th>
                                 <th><span>weight</span></th>
                                 <th><span>height</span></th>
                                 <th><span>health</span></th>
-                                <th>&nbsp;</th>
+                                <th><span>Course</span></th>
+                                <th style="width: 20%;">Option</th>
                             </tr>
                         </thead>
                         <tbody>
+                              <%int count1 = 0;%>
                             <c:forEach var="i" items="${listB}" >
                                 <tr>
-                                        <td><%count++;
-                                                out.print(count);%></td>
+                                        <td><%count1++;
+                                            out.print(count1);%></td>
                                     <td>
                                         <img src="./img/${i.imgAvt}" alt=""  width="50" height="50">
                                         <p>${i.childName}</p>
@@ -126,7 +132,7 @@
                                         </c:if>
                                     </td>
 
-                                    <td >
+                                    <td style="width: 2%;">
                                         ${i.getWeight()}
                                     </td>
                                     <td>
@@ -136,7 +142,7 @@
                                         ${i.getHealth()}
                                     </td>
                                     <td>
-                                       
+                                        ${i.getNameClass()}
                                     </td>
                                     <td style="width: 20%;">
                                         <a href="decision-skill?id=${i.idChild}&status=Accept" class="btn btn-success" type="button"  >Yes</a>

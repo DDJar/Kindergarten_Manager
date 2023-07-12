@@ -265,7 +265,7 @@ public class ChildDB {
                 String health = rs.getString(9);
                 String imgAvt = rs.getString(10);
                 String imgDob = rs.getString(11);
-                list.add(new Child(idChild, childName, idUser, dob, gender, progress, weight, height, health, imgAvt, imgDob,status));
+                list.add(new Child(idChild, childName, idUser, dob, gender, progress, weight, height, health, imgAvt, imgDob, status));
             }
             con.close();
             return list;
@@ -364,6 +364,7 @@ public class ChildDB {
                     + "      ,Child.[health]\n"
                     + "      ,Child.[imgAvt]\n"
                     + "      ,Child.[imgDob]\n"
+                    + "    ,ClassList.[className]\n"
                     + "    ,Class.[status]\n"
                     + "  FROM [A01_RT03].[dbo].[Class]\n"
                     + "  INNER JOIN Child\n"
@@ -385,7 +386,8 @@ public class ChildDB {
                 String health = rs.getString(10);
                 String imgAvt = rs.getString(11);
                 String imgDob = rs.getString(12);
-                list.add(new Child(idChild, childName, idUser, dob, gender, progress, weight, height, health, imgAvt, imgDob));
+                String nameClass = rs.getString(13);
+                list.add(new Child(idChild, childName, idUser, dob, gender, progress, weight, height, health, imgAvt, imgDob,"",nameClass));
             }
             con.close();
             return list;
@@ -410,6 +412,7 @@ public class ChildDB {
                     + "	   ,Child.[health]\n"
                     + "	   ,Child.[imgAvt]\n"
                     + "      ,Child.[imgDob]\n"
+                     + "    ,SkillList.[skillName]\n"
                     + "    ,Skill.[status]\n"
                     + "FROM [A01_RT03].[dbo].[Skill]\n"
                     + "INNER JOIN Child \n"
@@ -431,7 +434,8 @@ public class ChildDB {
                 String health = rs.getString(10);
                 String imgAvt = rs.getString(11);
                 String imgDob = rs.getString(12);
-                list.add(new Child(idChild, childName, idUser, dob, gender, progress, weight, height, health, imgAvt, imgDob));
+                String nameClass = rs.getString(13);
+                list.add(new Child(idChild, childName, idUser, dob, gender, progress, weight, height, health, imgAvt, imgDob,"",nameClass));
             }
             con.close();
             return list;
