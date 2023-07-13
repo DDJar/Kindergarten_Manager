@@ -138,6 +138,96 @@ public class ClassListDB {
         }
     }
 
+    public static void checkTimeEndClass(ArrayList<ClassList> list) {
+        LocalDateTime now = LocalDateTime.now();
+
+        for (int i = 0; i < list.size(); i++) {
+            ClassList get = list.get(i);
+            int comparisonResult = now.compareTo(get.getTimeEndSemester());
+            if (comparisonResult > 0) {
+                // Update thành Close
+                updateStatusClass(get);
+//                System.out.println(get.getTimeEnd() + "is earlier than " + now);
+            }
+        }
+
+    }
+
+    public static void checkTimeEndClassList(ArrayList<ClassList> list) {
+        LocalDateTime now = LocalDateTime.now();
+
+        for (int i = 0; i < list.size(); i++) {
+            ClassList get = list.get(i);
+            int comparisonResult = now.compareTo(get.getTimeEndSemester());
+            if (comparisonResult > 0) {
+                // Update thành Close
+                updateStatusClassList(get);
+//                System.out.println(get.getTimeEnd() + "is earlier than " + now);
+            }
+        }
+
+    }
+
+    public static boolean updateStatusClass(ClassList pro) {
+        boolean result = false;
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+
+            con = DatabaseInfo.getConnect();
+            if (con != null) {
+
+                String sql = "Update [Class] \n"
+                        + "  set [status] = 'Done'\n"
+                        + "  where [idClass] = ? ";
+
+                stmt = con.prepareStatement(sql);
+                stmt.setString(1, pro.getIdClass());
+
+                int value = stmt.executeUpdate();
+
+                result = value > 0 ? true : false;
+                con.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+        return result;
+    }
+
+    public static boolean updateStatusClassList(ClassList pro) {
+        boolean result = false;
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+
+            con = DatabaseInfo.getConnect();
+            if (con != null) {
+
+                String sql = "Update [ClassList] \n"
+                        + "  set [status] = 'Done'\n"
+                        + "  where [idClass] = ? ";
+
+                stmt = con.prepareStatement(sql);
+                stmt.setString(1, pro.getIdClass());
+
+                int value = stmt.executeUpdate();
+
+                result = value > 0 ? true : false;
+                con.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+        return result;
+    }
+
     public ClassList getAllClassById(String id) {
         ClassList list = null;
         try ( Connection con = DatabaseInfo.getConnect()) {

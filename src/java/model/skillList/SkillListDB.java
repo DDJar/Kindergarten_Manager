@@ -218,7 +218,95 @@ public class SkillListDB {
             throw new RuntimeException(e);
         }
     }
+public static void checkTimeEndSkill(ArrayList<SkillList> list) {
+        LocalDateTime now = LocalDateTime.now();
 
+        for (int i = 0; i < list.size(); i++) {
+            SkillList get = list.get(i);
+            int comparisonResult = now.compareTo(get.getTimeEndSemester());
+            if (comparisonResult > 0) {
+                // Update thành Close
+                updateStatusSkill(get);
+//                System.out.println(get.getTimeEnd() + "is earlier than " + now);
+            }
+        }
+
+    }
+
+    public static void checkTimeEndSkillList(ArrayList<SkillList> list) {
+        LocalDateTime now = LocalDateTime.now();
+
+        for (int i = 0; i < list.size(); i++) {
+            SkillList get = list.get(i);
+            int comparisonResult = now.compareTo(get.getTimeEndSemester());
+            if (comparisonResult > 0) {
+                // Update thành Close
+                updateStatusSkillList(get);
+//                System.out.println(get.getTimeEnd() + "is earlier than " + now);
+            }
+        }
+
+    }
+
+    public static boolean updateStatusSkill(SkillList pro) {
+        boolean result = false;
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+
+            con = DatabaseInfo.getConnect();
+            if (con != null) {
+
+                String sql = "Update [Skill] \n"
+                        + "  set [status] = 'Done'\n"
+                        + "  where [idSkill] = ? ";
+
+                stmt = con.prepareStatement(sql);
+                stmt.setString(1, pro.getIdSkill());
+
+                int value = stmt.executeUpdate();
+
+                result = value > 0 ? true : false;
+                con.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+        return result;
+    }
+
+    public static boolean updateStatusSkillList(SkillList pro) {
+        boolean result = false;
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+
+            con = DatabaseInfo.getConnect();
+            if (con != null) {
+
+                String sql = "Update [SkillList] \n"
+                        + "  set [status] = 'Done'\n"
+                        + "  where [idSkill] = ? ";
+
+                stmt = con.prepareStatement(sql);
+                stmt.setString(1, pro.getIdSkill());
+
+                int value = stmt.executeUpdate();
+
+                result = value > 0 ? true : false;
+                con.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+        return result;
+    }
     public static void UpdateStatus(String id, String status) {
         try ( Connection con = DatabaseInfo.getConnect()) {
             String sql = "UPDATE [dbo].[Skill] SET [status] = ?  WHERE [idChild] = ?";

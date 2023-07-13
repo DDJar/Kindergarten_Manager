@@ -74,168 +74,172 @@
                     <div class="row">
 
                         <c:forEach var="o" items="${listcl}" >
-                            <div class="col-lg-4 mb-5">
-                                <div class="card border-0 bg-light shadow-sm pb-2">
-                                    <img class="card-img-top mb-2" src="img/class-1.jpg" alt="">
-                                    <div class="card-body text-center">
-                                        <input type="hidden" name ="idClass" value="${o.getIdClass()}">
-                                        <h4 class="card-title"><input name="className" type="hidden" value="${o.getClassName()}"/>Class ${o.getClassName()}</h4>
-                                    </div>
-                                    <div class="card-footer bg-transparent py-4 px-5">
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right"><strong>Teacher</strong></div>
-                                            <div class="col-6 py-1"> <a href="ProfileById?idUser=${o.getIdUser()}" class="table-link">${o.getFullName()}</a></div>
+                            <c:if test="${o.getStatus() != 'Done      '}">
+                                <div class="col-lg-4 mb-5">
+                                    <div class="card border-0 bg-light shadow-sm pb-2">
+                                        <img class="card-img-top mb-2" src="img/class-1.jpg" alt="">
+                                        <div class="card-body text-center">
+                                            <input type="hidden" name ="idClass" value="${o.getIdClass()}">
+                                            <h4 class="card-title"><input name="className" type="hidden" value="${o.getClassName()}"/> ${o.getClassName()}</h4>
                                         </div>
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right"><strong>Age condition</strong></div>
-                                            <div class="col-6 py-1">${o.getCondition()}</div>
+                                        <div class="card-footer bg-transparent py-4 px-5">
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right"><strong>Teacher</strong></div>
+                                                <div class="col-6 py-1"> <a href="ProfileById?idUser=${o.getIdUser()}" class="table-link">${o.getFullName()}</a></div>
+                                            </div>
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right"><strong>Age condition</strong></div>
+                                                <div class="col-6 py-1">${o.getCondition()}</div>
+                                            </div>
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right" for="seat"><strong>Total Seats</strong></div>
+                                                <div class="col-6 py-1" name="totalSeat">${o.getTotalSeat()}</div>
+                                            </div>
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right"><strong>Time Start</strong></div>
+                                                <div class="col-6 py-1" name="timeStartSemester">${o.getStartDate1()}</div>
+                                            </div>
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right"><strong>Time End</strong></div>
+                                                <div class="col-6 py-1" name="timeEndSemester">${o.getEndDate1()}</div>
+                                            </div>
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right"><strong>Slot</strong></div>
+                                                <div class="col-6 py-1" name="slot">${o.getSlot()}</div>
+                                            </div>
                                         </div>
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right" for="seat"><strong>Total Seats</strong></div>
-                                            <div class="col-6 py-1" name="totalSeat">${o.getTotalSeat()}</div>
-                                        </div>
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right"><strong>Time Start</strong></div>
-                                            <div class="col-6 py-1" name="timeStartSemester">${o.getStartDate1()}</div>
-                                        </div>
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right"><strong>Time End</strong></div>
-                                            <div class="col-6 py-1" name="timeEndSemester">${o.getEndDate1()}</div>
-                                        </div>
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right"><strong>Slot</strong></div>
-                                            <div class="col-6 py-1" name="slot">${o.getSlot()}</div>
-                                        </div>
-                                    </div>
-                                    <c:if test="${user1 != null}">
-                                        <c:choose>
-                                            <c:when test="${o.getTotalSeat() > 15}">
-                                                <span class="navbar-text text-center">
-                                                    <a data-toggle="modal" data-target="#confirmClass${o.getIdClass().trim()}">
-                                                        <input type="button" class="btn btn-primary px-4 " value="Join Now">
-                                                    </a>
-                                                </span>
-                                            </c:when>
-                                            <c:when test="${o.getTotalSeat()==0}">
-                                                <span class="navbar-text text-center">
-                                                    <input type="button" class="btn btn-danger px-4 " value="Full">
-                                                </span>
-                                            </c:when>
-                                            <c:when test="${o.getTotalSeat()< 15 && o.getTotalSeat() >0}">
-                                                <span class="navbar-text text-center">
-                                                    <a data-toggle="modal" data-target="#confirmClass${o.getIdClass().trim()}">
-                                                        <input type="button" class="btn btn-warning px-4 " value="Join Now">
-                                                    </a>
-                                                </span>
-                                            </c:when>
-                                        </c:choose>
+                                        <c:if test="${user1 != null}">
+                                            <c:choose>
+                                                <c:when test="${o.getTotalSeat() > 15}">
+                                                    <span class="navbar-text text-center">
+                                                        <a data-toggle="modal" data-target="#confirmClass${o.getIdClass().trim()}">
+                                                            <input type="button" class="btn btn-primary px-4 " value="Join Now">
+                                                        </a>
+                                                    </span>
+                                                </c:when>
+                                                <c:when test="${o.getTotalSeat()==0}">
+                                                    <span class="navbar-text text-center">
+                                                        <input type="button" class="btn btn-danger px-4 " value="Full">
+                                                    </span>
+                                                </c:when>
+                                                <c:when test="${o.getTotalSeat()< 15 && o.getTotalSeat() >0}">
+                                                    <span class="navbar-text text-center">
+                                                        <a data-toggle="modal" data-target="#confirmClass${o.getIdClass().trim()}">
+                                                            <input type="button" class="btn btn-warning px-4 " value="Join Now">
+                                                        </a>
+                                                    </span>
+                                                </c:when>
 
-                                    </c:if>
-                                    <c:if test="${user1 == null}">
-                                        <span class="navbar-text text-center">
-                                            <a  href="login.jsp">
-                                                <input type="button" class="btn btn-success px-4 " value="Join Now">
-                                            </a>
-                                        </span>
-                                    </c:if>
+                                            </c:choose>
+
+                                        </c:if>
+
+                                        <c:if test="${user1 == null}">
+                                            <span class="navbar-text text-center">
+                                                <a  href="login.jsp">
+                                                    <input type="button" class="btn btn-success px-4 " value="Join Now">
+                                                </a>
+                                            </span>
+                                        </c:if>
 
 
-                                </div>
-                            </div>
-
-                            <div id="confirmClass${o.getIdClass().trim()}" class="modal fade " role="dialog" >
-                                <div class="modal-dialog modal-lg" role="content">
-                                    Modal content
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Confirm Register Class</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form action="registerClass" method="POST">
-                                                <div class="form-row row container">
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3 col-12">
-                                                            <h6 class="mb-0 pt-2">Parent Name</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            <input type="hidden" name ="idUser" value="${u.getIdUser()}"> ${u.getFullName()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3 col-12">
-                                                            <h6 class="mb-0 pt-2">Child Name</h6>
-                                                        </div>
-
-                                                        <select class="form-select form-control" style="width: 60%;margin-left: 19px"name="idChild" >
-
-                                                            <c:forEach items="${listc4}" var="c">
-                                                                <c:if test="${year - c.getDateOB().toLocalDate().getYear() == o.getCondition()}">
-                                                                    <option value="${c.idChild}">${c.childName}</option>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </select>
-
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3 col-12">
-                                                            <h6 class="mb-0 pt-2">Class Name</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            <input type="hidden" name ="idClass" class="form-control input_confirm" value="${o.getIdClass()}"required>${o.getClassName()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3">
-                                                            <h6 class="mb-0 pt-2">Total Seats</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            ${o.getTotalSeat()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3">
-                                                            <h6 class="mb-0 pt-2">Time Start</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            ${o.getTimeStart1()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3">
-                                                            <h6 class="mb-0 pt-2">Time End</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            ${o.getTimeEnd1()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3">
-                                                            <h6 class="mb-0 pt-2">Slot</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            ${o.getSlot()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3">
-                                                            <h6 class="mb-0 pt-2">Tuition Fee</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            ${o.getTuition()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-row text-left col-12">
-                                                        <button type="button" class="btn btn-secondary btn-sm ml-auto"
-                                                                data-dismiss="modal">Cancel</button>
-                                                        <button type="submit" class="btn btn-primary btn-sm ml-3 px-5">Save</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
                                     </div>
                                 </div>
-                            </div>
+
+                                <div id="confirmClass${o.getIdClass().trim()}" class="modal fade " role="dialog" >
+                                    <div class="modal-dialog modal-lg" role="content">
+                                        Modal content
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Confirm Register Class</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="registerClass" method="POST">
+                                                    <div class="form-row row container">
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3 col-12">
+                                                                <h6 class="mb-0 pt-2">Parent Name</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                <input type="hidden" name ="idUser" value="${u.getIdUser()}"> ${u.getFullName()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3 col-12">
+                                                                <h6 class="mb-0 pt-2">Child Name</h6>
+                                                            </div>
+
+                                                            <select class="form-select form-control" style="width: 60%;margin-left: 19px"name="idChild" >
+
+                                                                <c:forEach items="${listc4}" var="c">
+                                                                    <c:if test="${year - c.getDateOB().toLocalDate().getYear() == o.getCondition()}">
+                                                                        <option value="${c.idChild}">${c.childName}</option>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </select>
+
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3 col-12">
+                                                                <h6 class="mb-0 pt-2">Class Name</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                <input type="hidden" name ="idClass" class="form-control input_confirm" value="${o.getIdClass()}"required>${o.getClassName()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0 pt-2">Total Seats</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                ${o.getTotalSeat()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0 pt-2">Time Start</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                ${o.getTimeStart1()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0 pt-2">Time End</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                ${o.getTimeEnd1()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0 pt-2">Slot</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                ${o.getSlot()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0 pt-2">Tuition Fee</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                ${o.getTuition()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row text-left col-12">
+                                                            <button type="button" class="btn btn-secondary btn-sm ml-auto"
+                                                                    data-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-primary btn-sm ml-3 px-5">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
                         </c:forEach>
 
 
@@ -282,167 +286,169 @@
                     </div>
                     <div class="row">
                         <c:forEach var="i" items="${listc3}" >
-                            <div class="col-lg-4 mb-5">
-                                <div class="card border-0 bg-light shadow-sm pb-2">
-                                    <img class="card-img-top mb-2" src="img/class-1.jpg" alt="">
-                                    <div class="card-body text-center">
-                                        <input type="hidden" name ="idSkill" value="${i.getIdSkill()}">
-                                        <h4 class="card-title"><input name="skillName" type="hidden" value="${i.skillName}"/>Class ${i.skillName}</h4>
-                                    </div>
-                                    <div class="card-footer bg-transparent py-4 px-5">
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right"><strong>Teacher</strong></div>
-                                            <div class="col-6 py-1"> <a href="ProfileById?idUser=${i.getIdUser()}" class="table-link">${i.getFullName()}</a></div>
+                            <c:if test="${i.getStatus() != 'Done      '}">
+                                <div class="col-lg-4 mb-5">
+                                    <div class="card border-0 bg-light shadow-sm pb-2">
+                                        <img class="card-img-top mb-2" src="img/class-2.jpg" alt="">
+                                        <div class="card-body text-center">
+                                            <input type="hidden" name ="idSkill" value="${i.getIdSkill()}">
+                                            <h4 class="card-title"><input name="skillName" type="hidden" value="${i.skillName}"/> ${i.skillName}</h4>
                                         </div>
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right"><strong>Age condition</strong></div>
-                                            <div class="col-6 py-1">${i.getCondition()}</div>
-                                        </div>
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right" for="seat"><strong>Total Seats</strong></div>
-                                            <div class="col-6 py-1" name="totalSeat">${i.getTotalSeat()}</div>
-                                        </div>
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right"><strong>Time Start</strong></div>
-                                            <div class="col-6 py-1" name="timeStartSemester">${i.getStartDate1()}</div>
-                                        </div>
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right"><strong>Time End</strong></div>
-                                            <div class="col-6 py-1" name="timeEndSemester">${i.getEndDate1()}</div>
-                                        </div>
-                                        <div class="row border-bottom">
-                                            <div class="col-6 py-1 text-right border-right"><strong>Slot</strong></div>
-                                            <div class="col-6 py-1" name="slot">${i.getSlot()}</div>
-                                        </div>
+                                        <div class="card-footer bg-transparent py-4 px-5">
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right"><strong>Teacher</strong></div>
+                                                <div class="col-6 py-1"> <a href="ProfileById?idUser=${i.getIdUser()}" class="table-link">${i.getFullName()}</a></div>
+                                            </div>
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right"><strong>Age condition</strong></div>
+                                                <div class="col-6 py-1">${i.getCondition()}</div>
+                                            </div>
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right" for="seat"><strong>Total Seats</strong></div>
+                                                <div class="col-6 py-1" name="totalSeat">${i.getTotalSeat()}</div>
+                                            </div>
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right"><strong>Time Start</strong></div>
+                                                <div class="col-6 py-1" name="timeStartSemester">${i.getStartDate1()}</div>
+                                            </div>
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right"><strong>Time End</strong></div>
+                                                <div class="col-6 py-1" name="timeEndSemester">${i.getEndDate1()}</div>
+                                            </div>
+                                            <div class="row border-bottom">
+                                                <div class="col-6 py-1 text-right border-right"><strong>Slot</strong></div>
+                                                <div class="col-6 py-1" name="slot">${i.getSlot()}</div>
+                                            </div>
 
-                                    </div>
-                                    <c:if test="${user1 != null}">
-                                        <c:choose>
-                                            <c:when test="${i.getTotalSeat() > 15}">
-                                                <span class="navbar-text text-center">
-                                                    <a data-toggle="modal" data-target="#confirmClass${i.getIdSkill().trim()}">
-                                                        <input type="button" class="btn btn-primary px-4 " value="Join Now">
-                                                    </a>
-                                                </span>
-                                            </c:when>
-                                            <c:when test="${i.getTotalSeat()==0}">
-                                                <span class="navbar-text text-center">
-                                                    <input type="button" class="btn btn-danger px-4 " value="Full">
-
-                                                </span>
-                                            </c:when>
-                                            <c:when test="${i.getTotalSeat()< 15 && i.getTotalSeat() >0}">
-                                                <span class="navbar-text text-center">
-                                                    <a data-toggle="modal" data-target="#confirmClass${i.getIdSkill().trim()}">
-                                                        <input type="button" class="btn btn-warning px-4 " value="Join Now">
-                                                    </a>
-                                                </span>
-                                            </c:when>
-                                        </c:choose>
-                                    </c:if>
-
-                                    <c:if test="${user1 == null}">
-                                        <span class="navbar-text text-center">
-                                            <a  href="login.jsp">
-                                                <input type="button" class="btn btn-success px-4 " value="Join Now">
-                                            </a>
-                                        </span>
-                                    </c:if>
-
-                                </div>
-                            </div>
-
-                            <div id="confirmClass${i.getIdSkill().trim()}" class="modal fade " role="dialog" >
-                                <div class="modal-dialog modal-lg" role="content">
-                                    Modal content
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h4 class="modal-title">Confirm Register Class</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
-                                        <div class="modal-body">
-                                            <form action="registerCousre" method="POST">
-                                                <div class="form-row row container">
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3 col-12">
-                                                            <h6 class="mb-0 pt-2">Parent Name</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            <input type="hidden" name ="idUser" value="${u.getIdUser()}"> ${u.getFullName()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3 col-12">
-                                                            <h6 class="mb-0 pt-2">Child Name</h6>
-                                                        </div>
-                                                        <select class="form-select form-control" style="width: 60%;margin-left: 19px"name="idChild" >
-                                                            <c:forEach items="${listc2}" var="c">
-                                                                <c:if test="${year - c.getDateOB().toLocalDate().getYear() == i.getCondition()}">
-                                                                    <option value="${c.idChild}">${c.childName}</option>
-                                                                </c:if>
-                                                            </c:forEach>
-                                                        </select>
+                                        <c:if test="${user1 != null}">
+                                            <c:choose>
+                                                <c:when test="${i.getTotalSeat() > 15}">
+                                                    <span class="navbar-text text-center">
+                                                        <a data-toggle="modal" data-target="#confirmClass${i.getIdSkill().trim()}">
+                                                            <input type="button" class="btn btn-primary px-4 " value="Join Now">
+                                                        </a>
+                                                    </span>
+                                                </c:when>
+                                                <c:when test="${i.getTotalSeat()==0}">
+                                                    <span class="navbar-text text-center">
+                                                        <input type="button" class="btn btn-danger px-4 " value="Full">
 
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3 col-12">
-                                                            <h6 class="mb-0 pt-2">Skill Name</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            <input type="hidden" name ="idSkill" class="form-control input_confirm" value="${i.getIdSkill()}"required>${i.skillName}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3">
-                                                            <h6 class="mb-0 pt-2">Total Seats</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            ${i.getTotalSeat()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3">
-                                                            <h6 class="mb-0 pt-2">Time Start</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            ${i.getTimeStart1()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3">
-                                                            <h6 class="mb-0 pt-2">Time End</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            ${i.getTimeEnd1()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3">
-                                                            <h6 class="mb-0 pt-2">Slot</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            ${i.getSlot()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mb-3 col-12">
-                                                        <div class="col-sm-3">
-                                                            <h6 class="mb-0 pt-2">Tuition Fee</h6>
-                                                        </div>
-                                                        <div class="col-sm-9 text-secondary">
-                                                            ${i.getTuition()}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-row text-left col-12">
-                                                        <button type="button" class="btn btn-secondary btn-sm ml-auto"
-                                                                data-dismiss="modal">Cancel</button>
-                                                        <button type="submit" class="btn btn-primary btn-sm ml-3 px-5">Save</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                                    </span>
+                                                </c:when>
+                                                <c:when test="${i.getTotalSeat()< 15 && i.getTotalSeat() >0}">
+                                                    <span class="navbar-text text-center">
+                                                        <a data-toggle="modal" data-target="#confirmClass${i.getIdSkill().trim()}">
+                                                            <input type="button" class="btn btn-warning px-4 " value="Join Now">
+                                                        </a>
+                                                    </span>
+                                                </c:when>
+                                            </c:choose>
+                                        </c:if>
+
+                                        <c:if test="${user1 == null}">
+                                            <span class="navbar-text text-center">
+                                                <a  href="login.jsp">
+                                                    <input type="button" class="btn btn-success px-4 " value="Join Now">
+                                                </a>
+                                            </span>
+                                        </c:if>
+
                                     </div>
                                 </div>
-                            </div>
+
+                                <div id="confirmClass${i.getIdSkill().trim()}" class="modal fade " role="dialog" >
+                                    <div class="modal-dialog modal-lg" role="content">
+                                        Modal content
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Confirm Register Class</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="registerCousre" method="POST">
+                                                    <div class="form-row row container">
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3 col-12">
+                                                                <h6 class="mb-0 pt-2">Parent Name</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                <input type="hidden" name ="idUser" value="${u.getIdUser()}"> ${u.getFullName()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3 col-12">
+                                                                <h6 class="mb-0 pt-2">Child Name</h6>
+                                                            </div>
+                                                            <select class="form-select form-control" style="width: 60%;margin-left: 19px"name="idChild" >
+                                                                <c:forEach items="${listc2}" var="c">
+                                                                    <c:if test="${year - c.getDateOB().toLocalDate().getYear() == i.getCondition()}">
+                                                                        <option value="${c.idChild}">${c.childName}</option>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </select>
+
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3 col-12">
+                                                                <h6 class="mb-0 pt-2">Skill Name</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                <input type="hidden" name ="idSkill" class="form-control input_confirm" value="${i.getIdSkill()}"required>${i.skillName}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0 pt-2">Total Seats</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                ${i.getTotalSeat()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0 pt-2">Time Start</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                ${i.getTimeStart1()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0 pt-2">Time End</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                ${i.getTimeEnd1()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0 pt-2">Slot</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                ${i.getSlot()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row mb-3 col-12">
+                                                            <div class="col-sm-3">
+                                                                <h6 class="mb-0 pt-2">Tuition Fee</h6>
+                                                            </div>
+                                                            <div class="col-sm-9 text-secondary">
+                                                                ${i.getTuition()}
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-row text-left col-12">
+                                                            <button type="button" class="btn btn-secondary btn-sm ml-auto"
+                                                                    data-dismiss="modal">Cancel</button>
+                                                            <button type="submit" class="btn btn-primary btn-sm ml-3 px-5">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:if>
                         </c:forEach>
 
 

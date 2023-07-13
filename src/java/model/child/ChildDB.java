@@ -249,8 +249,8 @@ public class ChildDB {
             PreparedStatement stmt = con.prepareStatement("SELECT Child.idChild, Child.childName, Child.idUser, Child.dob, Child.gender, Child.progress, "
                     + "Child.weight, Child.height, Child.health, Child.imgAvt, Child.imgDob, Class.status\n"
                     + "                    FROM Child\n"
-                    + " LEFt JOIN Class ON Child.idChild = Class.idChild AND Class.status = '" + status + "    '\n"
-                    + "                   WHERE( NOT EXISTS (SELECT 1 FROM Class WHERE Class.idChild = Child.idChild) OR Class.status != '" + status + "    ')And Child.idUser='" + id + "'\n"
+                    + " LEFt JOIN Class ON Child.idChild = Class.idChild\n"
+                    + "                   WHERE( NOT EXISTS (SELECT 1 FROM Class WHERE Class.idChild = Child.idChild) OR Class.status != '" + status + "    ')And Class.status !='Regist    ' And Child.idUser='" + id + "'\n"
                     + "                   ORDER BY Child.childName");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {

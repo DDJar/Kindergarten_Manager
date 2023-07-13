@@ -40,7 +40,11 @@ public class ListClass extends HttpServlet {
         ClassListDB c = new ClassListDB();
         SkillListDB s = new SkillListDB();
         ArrayList<model.Class.ClassList> cl = c.getAllClassByDateClass();
+        ClassListDB.checkTimeEndClass(cl);
+         ClassListDB.checkTimeEndClassList(cl);
         ArrayList<model.skillList.SkillList> sl = s.getAllSkillByDate();
+        SkillListDB.checkTimeEndSkill(sl);
+         SkillListDB.checkTimeEndSkillList(sl);
        List<Child> child = ChildDB.getAllChildByIdChildAndStatusSkill(id, "Accept");
         List<Child> child1 = ChildDB.getAllChildByIdChildAndStatusClass(id, "Accept");
         request.setAttribute("year", LocalDate.now().getYear());
