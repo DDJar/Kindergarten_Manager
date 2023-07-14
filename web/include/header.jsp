@@ -78,7 +78,7 @@
                             <a href="admin.jsp" class="nav-item nav-link">ADMIN</a>
                         </c:if>
                             
-                        <div class="nav-item dropdown">
+<!--                        <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                             <div class="dropdown-menu rounded-0 m-0">
                                 <a href="blog.jsp" class="dropdown-item">Blog Grid</a>
@@ -86,7 +86,7 @@
                             </div>
                         </div>
 
-
+-->
 
                     </div>
                     <c:if test="${user1 == null}">

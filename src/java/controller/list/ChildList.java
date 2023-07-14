@@ -41,7 +41,7 @@ public class ChildList extends HttpServlet {
         SkillListDB s = new SkillListDB();
         model.Class.ClassList list = l.getAllClassById(id);
           Users  user = UsersDB.getUserById(list.getIdTeacher());
-            List<Child> childList = c.getAllChildByIdClass(id, "Accept    ");
+            List<Child> childList = c.getAllChildByIdClass1(id, "Accept    ");
             request.setAttribute("listA", childList);
             request.setAttribute("user2", user);
             request.getRequestDispatcher("childList.jsp").forward(request, response);

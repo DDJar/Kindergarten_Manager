@@ -348,7 +348,50 @@ public class ChildDB {
             throw new RuntimeException("something wrong!");
         }
     }
-
+ public ArrayList<Child> getAllChildByIdClass1(String id, String status) {
+        ArrayList<Child> list = new ArrayList<>();
+        try ( Connection con = DatabaseInfo.getConnect()) {
+            PreparedStatement stmt = con.prepareStatement("SELECT  [ClassList].[idClass]\n"
+                    + "      ,Child.idChild\n"
+                    + "      ,Child.[childName]\n"
+                    + "      ,Child.[idUser]\n"
+                    + "      ,Child.[dob]\n"
+                    + "      ,Child.[gender]\n"
+                    + "      ,Child.[progress]\n"
+                    + "      ,Child.[weight]\n"
+                    + "      ,Child.[height]\n"
+                    + "      ,Child.[health]\n"
+                    + "      ,Child.[imgAvt]\n"
+                    + "      ,Child.[imgDob]\n"
+                    + "    ,Class.[status]\n"
+                    + "  FROM [A01_RT03].[dbo].[Class]\n"
+                    + "  INNER JOIN Child\n"
+                    + "  ON Child.idChild  = [Class].idChild\n"
+                    + "   INNER JOIN [ClassList]\n"
+                    + "  ON [ClassList].[idClass]  = [Class].idClass\n"
+                    + "  where [ClassList].[idClass] ='" + id + "' AND Class.[status] ='" + status + "' \n"
+                    + "  order by childName");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                String idChild = rs.getString(2);
+                String childName = rs.getString(3);
+                String idUser = rs.getString(4);
+                Date dob = rs.getDate(5);
+                String gender = rs.getString(6);
+                String progress = rs.getString(7);
+                double weight = rs.getDouble(8);
+                int height = rs.getInt(9);
+                String health = rs.getString(10);
+                String imgAvt = rs.getString(11);
+                String imgDob = rs.getString(12);
+                list.add(new Child(idChild, childName, idUser, dob, gender, progress, weight, height, health, imgAvt, imgDob));
+            }
+            con.close();
+            return list;
+        } catch (Exception ex) {
+            throw new RuntimeException("something wrong!");
+        }
+    }
     public ArrayList<Child> getAllChildByStatus(String status) {
         ArrayList<Child> list = new ArrayList<>();
         try ( Connection con = DatabaseInfo.getConnect()) {
