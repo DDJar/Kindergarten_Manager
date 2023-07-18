@@ -237,7 +237,7 @@
                                             <c:choose>
                                                 <c:when test="${classList.getClassName() ==  null}">
                                                     <a href="ListClass?id=${u.getIdUser()}" class="nav-item nav-link">
-                                                        Children do not have Course yet. <span class="btn btn-primary">Go to Regist_Course ===></span> 
+                                                        Children do not have Course yet. <span class="btn btn-primary">Go to Regist_Class ===></span> 
                                                     </a>
                                                 </c:when>
                                                 <c:when test="${classList.getClassName() !=  null}">

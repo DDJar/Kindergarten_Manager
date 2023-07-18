@@ -111,7 +111,7 @@
                         }
                     %>
                 </div>
-                <a href="index.jsp" > <button>Home</button></a>
+                    <a href="PaymentByIdChild?idChild=${idChild}" > <button class="bg-primary">Check Payment</button></a>
                 <c:remove var="idChild" scope="session"/>
             </div>
             <p>

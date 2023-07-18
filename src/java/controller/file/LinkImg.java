@@ -10,6 +10,7 @@ package controller.file;
  */
 public class LinkImg {
     public static String pathImg(){
-        return "C:\\Users\\ASUS-PRO\\OneDrive\\Documents\\NetBeansProjects\\SWP391\\A01_RT03\\web\\img\\";
+        return "C:\\Users\\ASUS-PRO\\OneDrive\\Documents\\NetBeansProjects\\SWP391\\A01_RT03\\web\\img\\"; // Viet
+    //    return "D:\\learnFPT\\Major5\\SWR-SWT\\RT03-A01\\Viet_v8\\A01_RT03\\A01_RT03\\web\\img\\" ; // Ý
     }
 }
